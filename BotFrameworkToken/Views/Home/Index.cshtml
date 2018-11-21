@@ -12,13 +12,29 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script>
         $.post("Home/StartConversation", function (data) {
+            var botLanguage = 'nl'
+            var botConnection = new BotChat.DirectLine({ token: data.token });
+            var user = {
+                id: 'userid',
+                name: 'username'
+            }
+            var bot = {
+                id: 'botid',
+                name: 'botname'
+            }
             BotChat.App({
-                directLine: { token: data.token },
-                user: { id: 'userid' },
-                bot: { id: 'botid' },
+                directLine: botConnection,
+                user: user,
+                bot: bot,
                 resize: 'detect'
             }, document.getElementById("bot"));
-        });
 
+            botConnection.postActivity({
+                from: user,
+                name: 'SetLanguage',
+                type: 'message',
+                value: botLanguage
+            }).subscribe(id => console.log("success"));
+        });
     </script>
 }
