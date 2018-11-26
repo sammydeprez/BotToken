@@ -31,9 +31,9 @@
 
             botConnection.postActivity({
                 from: user,
-                name: 'SetLanguage',
-                type: 'message',
-                value: botLanguage
+                name: 'InitiateChannelData',
+                type: 'event',
+                value: { "Language": "nl", "OrderNumber": "123456" }
             }).subscribe(id => console.log("success"));
         });
     </script>
